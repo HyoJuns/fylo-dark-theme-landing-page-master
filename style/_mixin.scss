@@ -1,0 +1,158 @@
+@import './variable';
+
+// 그라디언트 설정
+@mixin Setgradient($deg, $startColor, $endColor)
+{
+    background: $startColor;
+    background: -webkit-linear-gradient($deg, $startColor, $endColor);
+    background: -moz-linear-gradient($deg, $startColor, $endColor);
+    background: -o-linear-gradient($deg, $startColor,$endColor);
+    background: linear-gradient($deg, $startColor, $endColor);
+}
+
+// font family
+@mixin Setfontfamily($font) {
+    font-family: $font, 'sans-serif';
+}
+
+// 초기화
+@mixin init
+{
+    *
+    {
+        margin : 0;
+        padding : 0;
+        box-sizing: border-box;
+    }
+    html
+    {
+        font-size : 62.5%;
+    }
+    body
+    {
+        width : 100vw;
+        height : 3100px;
+        display: flex;
+
+        justify-content: center;
+        align-items: flex-start;
+
+        font-size: 1.4rem;
+        @include Setfontfamily($font-opensans);
+
+    }
+    @include Setbackground();
+}
+
+@mixin Setbackground
+{
+    @each $name, $value in $management-color
+    {
+        
+        .bg-#{$name}
+        {
+            background-color: $value;
+        }
+    }
+}
+
+// Position Absolute
+@mixin position-absolute
+{
+    position : absolute;
+
+    left : 0;
+    top : 0;
+}
+
+// 디버그
+@mixin debug($color)
+{
+    outline: 2px dashed $color;
+}
+
+// 제곱
+@function pow($base, $exponse)
+{
+    $result : 1;
+
+    @for $_ from 1 through $exponse
+    {
+        $result : $result + $base;
+    }
+    @return $result;
+}
+
+// 합계
+@function sum($numbers...)
+{
+    $sum : 0;
+
+    @each $number in $numbers
+    {
+        $sum : $sum + $number;
+    }
+
+    @return $sum;
+}
+// 뺄셈
+@function sub($numbers...)
+{
+    $default : nth($numbers,1);
+    @if length($numbers) == 1
+    {
+        @return nth($numbers,1);
+    }
+
+    @for $i from 2 through length($numbers)
+    {
+        $default : $default - nth($numbers, $i);
+    }
+    @debug $default;
+    @return $default;
+}
+// 곱셈
+@function mult($numbers...)
+{
+    $mul : 1;
+
+    @each $number in $numbers
+    {
+        $mul : $mul * $number;
+    }
+}
+// 평균
+@function avg($numbers...)
+{
+    @if length($numbers) == 0
+    {
+        @error 'avg error';
+    }
+    $sum : 0;
+    $result : 0;
+
+    @each $number in $numbers {
+        $sum : $sum + $number;
+    }
+
+    $result : $sum / length($numbers);
+
+    @return $result;
+}
+
+// Mobile
+@mixin mobile
+{
+    @media (min-width : #{$breakpoint-mobile}) and (max-width : #{$breakpoint-desktop - 1px})
+    {
+        @content;
+    }
+}
+// Desktop
+@mixin desktop
+{
+    @media (min-width : #{$breakpoint-desktop})
+    {
+        @content;
+    }
+}

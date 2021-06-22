@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&display=swap');
+
+$breakpoint-mobile : 375px;
+$breakpoint-desktop : 1440px;
+
+$management-color : (
+    'intro' : hsl(217, 28%, 15%),
+    'main' : hsl(218, 28%, 13%),
+    'footer' : hsl(216, 53%, 9%),
+    'test' : hsl(219, 30%, 18%)
+);
+
+$gradient-start : hsl(176, 68%, 64%);
+$gradient-end : hsl(198, 60%, 50%);
+$error : hsl(0, 100%, 63%);
+
+$white : hsl(0,0%,100%);
+
+$font-opensans : 'Open Sans';
+$font-raleway : 'Raleway';
